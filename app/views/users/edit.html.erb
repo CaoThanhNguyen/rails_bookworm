@@ -1,0 +1,31 @@
+<%= render "shared/head" %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="/users/<%=@user.id%>" method="POST">
+                    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <div class="form_group">
+                        <label>Username</label>
+                        <input class="form-control" name="userInfo[username]" value="<%= @user.username %>">
+                    </div>
+                    <br>
+                    <div class="form_group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" name="userInfo[password]" placeholder="Enter your password">
+                        <small id="passwordHelp" class="form-text text-muted">* Password should be at least 8 characters.</small>
+                    </div>
+                    <br>
+                    <div class="form_group">
+                        <label>New Password Confirmation</label>
+                        <input type="password" class="form-control" name="userInfo[password_confirmation]" placeholder="Re-Enter your password">
+                    </div>
+                    <br>
+                    <button class="btn btn-primary">Update</button>
+                </form>
+            
+            </div>  
+        </div>
+    </div>
+</body>
+</html>

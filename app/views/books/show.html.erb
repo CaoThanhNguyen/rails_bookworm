@@ -1,0 +1,54 @@
+<%= render "shared/head" %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4><%= @book.title %></h4> 
+                <p class="pb-3">Author: <%= @book.author.name %></p>
+                <% if @reviews %>
+                    <h5>Reviews: </h5>
+                    <hr>
+                    <% for review in @reviews %>
+                        <p>Rating:
+                            <% for i in (1..review.rating) %> 
+                                <i class="fa fa-star" style="color: yellow; display: inline-block;"></i>
+                            <% end %>
+                            <% if review.rating < 5 %>
+                            <% for i in (review.rating...5) %> 
+                                <i class="fa fa-star" style="color: gray; display: inline-block;"></i>
+                            <% end %>
+                            <% end %>
+                        </p>
+
+                        <p><a href="/users/<%= review.user.id %>"><%= review.user.username%></a> says: <%= review.review %></p>
+                        <p>Posted on <%= review.created_at %></p>
+                        <% if current_user.id == review.user.id %>
+                            <form action="/reviews/<%= review.id %>" method="POST">
+                                <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">Delete Review</button>
+                            </form>
+                        <% end %>
+                        <hr>
+                    <% end %>
+                <% end %>
+            </div> 
+            <div class="col-md-5 offset-md-1">
+                <h4>Add a Review</h4>
+                <form action="/reviews/<%= @book.id %>" method="POST">
+                    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                    <textarea class="form-control" name="reviewInfo[review]" rows="5"></textarea>
+                    <br>
+                    <p>Rating: <select name="reviewInfo[rating]">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select> star(s)</p> 
+                    <button type="submit" class="btn btn-primary">Add Review</button>
+                </form>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>

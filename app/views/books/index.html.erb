@@ -1,0 +1,42 @@
+<%= render "shared/head" %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="pb-3">Recent Book Reviews</h4>
+            <% for review in @recent_reviews %>
+                <a class="" href="/books/<%= review.book.id %>"><h5><%= review.book.title %></h5></a>
+                <p>Rating:
+                    <% for i in (1..review.rating) %> 
+                        <i class="fa fa-star" style="color: yellow; display: inline-block;"></i>
+                    <% end %>
+                    <% if review.rating < 5 %>
+                    <% for i in (review.rating...5) %> 
+                        <i class="fa fa-star" style="color: gray; display: inline-block;"></i>
+                    <% end %>
+                    <% end %>
+                </p>
+                <p><a href="/users/<%= review.user.id %>"><%= review.user.username %></a> says: <%= review.review %></p>
+                <p>Posted on <%= review.created_at %></p>
+                <% if current_user.id == review.user.id %>
+                    <form action="/reviews/<%= review.id %>" method="POST">
+                        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger">Delete Review</button>
+                    </form>
+                <% end %>
+                <hr>
+            <% end %>
+        </div>
+        <div class="col-md-5 offset-md-1">
+            <h4 class="pb-3">Other books with Reviews</h4>
+            <ul style="overflow-y: scroll; min-height:100px; max-height:300px; width:150%">
+                <% for book in @other_books %>
+                <li style="list-style-type: none"><a href="/books/<%=book.id%>"><%= book.title %></a></li>
+                <% end %>
+            </ul>
+            <a class="btn btn-success mt-3" href="/books/new">Add Book & Review</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

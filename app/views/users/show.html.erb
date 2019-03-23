@@ -1,0 +1,27 @@
+<%= render "shared/head"%>
+<div class="container">
+    <div class="col-md-10 p-4">
+        <h4><%= @user.username %></h4> 
+        <p>Email: <%= @user.email %></p>
+        <p>Total Reviews: <%= @total_reviews %></p>
+        <br>
+        <p>Posted Reviews on the following books:</p>
+        <ul>
+        <% for book in @reviewed_books %>
+            <li>
+                <a href="/books/<%=book.id%>"><%= book.title %></a>
+            </li>
+        <% end %>
+        </ul>
+        <% if current_user.id == @user.id %>
+            <form class="form-inline" action="/users/<%= @user.id %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                <input type="hidden" name="_method" value="delete">
+                <a class="btn btn-warning mr-2" href="/users/<%= @user.id %>/edit">Edit Account</a>
+                <button class="btn btn-danger">Detele Account</button>
+            </form>
+        <% end %>
+    </div>
+</div>
+</body>
+</html>
