@@ -15,7 +15,7 @@
                         <small id="authordHelp" class="form-text text-muted pb-2">* Please choose "Other" if you want to add new author</small>
                         <p class="pl-5">Choose from the existing authors: 
                             <select class="form-control" name="bookInfo[existing_author]">
-                                <option value="">Other</option>
+                                <option value="-1">Other</option>
                             <% if @authors%>
                                 <% for author in @authors %>
                                 <option value="<%= author.id %>"><%= author.name %></option>

@@ -39,14 +39,14 @@ class BooksController < ApplicationController
 
     def create
         bookInfo = allowed_book_params
-        existing_author = bookInfo.fetch(:existing_author)
-        if !existing_author.empty?
-            author_name = existing_author
+        existing_author_id = bookInfo.fetch(:existing_author)
+        print("existing_author=#{existing_author_id}")
+        if existing_author_id !="-1"
+            @author = Author.find(id=existing_author_id)
         else
-            author_name = bookInfo.fetch(:new_author)
+            @author = Author.new(name:bookInfo.fetch(:new_author))
         end
         @user = User.find(id=session[:user_id])
-        @author = Author.new(name:author_name)
         if @author.save
             @book = Book.new(title: bookInfo.fetch(:title), author:@author, user:@user)
             if @book.save

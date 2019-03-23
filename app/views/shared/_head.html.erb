@@ -30,7 +30,6 @@
         <% end %> 
         <div class="container col-8">
         <% if flash[:errors] %>
-            <% flash[:errors].each do |e| %>
             <div class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -41,11 +40,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                        <% flash[:errors].each do |e| %>
                             <p><%= e %></p>
+                        <% end %>
                         </div>
                     </div>
                 </div>
             </div>
-        <% end %>
     <% end %>
     
