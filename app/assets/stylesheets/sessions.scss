@@ -1,3 +1,22 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+    height: 100%;
+}
+
+.bg-main {
+    background-image: linear-gradient(to bottom,rgba(92,77,66,.5) 0,rgba(92,77,66,.5) 100%), 
+        url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1441&q=80");
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 3%;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
